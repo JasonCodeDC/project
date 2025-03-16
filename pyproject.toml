@@ -1,7 +1,21 @@
 [project]
-name = "project"
-version = "0.1.0"
-description = "Add your description here"
+name = "Predator-Prey-Dynamics"
+version = "0.1.1"
+description = "A predator prey simulation using the genetic algorithm to simulate evolution"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.4.1",
+    "pre-commit>=4.1.0",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true
