@@ -80,7 +80,7 @@ class Map:
         :param y: y coordinate of the tile
         :type y: int
         :raises MapError:
-            * If map is not initialised
+            * If map is not initialised\n
             * If one or both coordinates are out of bounds
         :return: The :class:`TerrainTypes` member at ``(x, y)``
         :rtype: TerrainTypes
