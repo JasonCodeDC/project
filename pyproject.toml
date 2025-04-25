@@ -9,6 +9,12 @@ dependencies = []
 [dependency-groups]
 dev = [
     "commitizen>=4.6.0",
+    "pygame>=2.6.1",
+]
+docs = [
+    "catppuccin[pygments]>=2.4.1",
+    "furo>=2024.8.6",
+    "sphinx>=8.2.3",
 ]
 
 [tool.commitizen]
