@@ -39,6 +39,16 @@ TERTIARY_SETTINGS: Settings = {
 
 
 def spawn(group: pygame.sprite.Group, settings: Settings, amount: int):
+    """
+    Spawn an Animal in a pygame group, with specific settings, and a certain number of them
+
+    :param group: The group the animal is in
+    :type group: pygame.sprite.Group
+    :param settings: settings, in a dict with keys: ``"speed"``, ``"health"``, ``"strength"``, ``"colour"``
+    :type settings: Settings
+    :param amount: Number of this animal to randomly spawn in
+    :type amount: int
+    """
     for _ in range(amount):
         Animal(
             group,
@@ -51,7 +61,12 @@ def spawn(group: pygame.sprite.Group, settings: Settings, amount: int):
         )
 
 
-if __name__ == "__main__":
+def run():
+    """
+    Main function of the program
+
+    :raises SystemExit: If pygame exits
+    """
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -96,3 +111,6 @@ if __name__ == "__main__":
 
         pygame.display.flip()
         clock.tick(5)
+
+if __name__ == "__main__":
+    run()
