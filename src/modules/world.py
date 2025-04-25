@@ -1,6 +1,6 @@
 import random
 from enum import Enum
-from typing import Any, Optional
+from typing import Any, Optional, Tuple
 
 
 class TerrainTypes(Enum):
@@ -91,7 +91,7 @@ class Map:
             raise MapError("Value out of bounds")
         return self.map[y][x]
 
-    def get_tile_colour(self, x: int, y: int) -> tuple[int, int, int]:
+    def get_tile_colour(self, x: int, y: int) -> Tuple[int, int, int]:
         """ 
         Get the tile colour at a specific (x, y) coordinate
 
