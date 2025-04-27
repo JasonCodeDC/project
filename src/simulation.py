@@ -1,4 +1,5 @@
-# main.py
+# simulation.py
+
 import random
 from typing import Tuple, TypedDict
 

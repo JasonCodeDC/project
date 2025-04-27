@@ -1,9 +1,11 @@
+# modules\animals.py
+
 import random
+from typing import Tuple
 
 import pygame
 from pygame.sprite import Group, Sprite
 
-from typing import Tuple
 
 class InvalidDirectionError(Exception):
     pass
@@ -48,7 +50,7 @@ class Animal(Sprite):
         speed: int,
         health: int,
         strength: int,
-        colour: Tuple[int, int, int]
+        colour: Tuple[int, int, int],
     ) -> None:
         """
         Constructor method
@@ -84,7 +86,7 @@ class Animal(Sprite):
                 self.rect.x += self._speed
             case _:
                 raise InvalidDirectionError("Invalid direction (up, down, left, right)")
-            
+
         max_x = self._screen_width - self.rect.width
         max_y = self._screen_height - self.rect.height
         self.rect.x = max(0, min(self.rect.x, max_x))
