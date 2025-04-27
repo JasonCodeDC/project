@@ -6,11 +6,11 @@ from typing import Tuple, TypedDict
 import pygame
 from pygame.locals import QUIT
 
-from modules.animals import Animal
-from modules.world import Map
+from src.modules.animals import Animal
+from src.modules.world import Map
 
 WIDTH, HEIGHT = 1280, 720
-
+NUM_BIOMES = 5
 
 class Settings(TypedDict):
     speed: int
@@ -74,7 +74,7 @@ def run():
     Animal.set_bounds(WIDTH, HEIGHT)
 
     world = Map(640, 360)
-    world.generate_map()
+    world.generate_map(NUM_BIOMES)
 
     tile_w = WIDTH // world._width
     tile_h = HEIGHT // world._height
