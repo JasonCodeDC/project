@@ -1,7 +1,7 @@
-﻿modules.world
-=============
+﻿src.modules.world
+=================
 
-.. automodule:: modules.world
+.. automodule:: src.modules.world
 
    
    .. rubric:: Classes

@@ -16,7 +16,7 @@ API Reference
    :toctree: api
    :recursive:
 
-   simulation
-   tests
-   modules.animals
-   modules.world
+   src.simulation
+   src.tests.test_world
+   src.modules.animals
+   src.modules.world

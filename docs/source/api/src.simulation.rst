@@ -1,7 +1,7 @@
-﻿simulation
-==========
+﻿src.simulation
+==============
 
-.. automodule:: simulation
+.. automodule:: src.simulation
 
    
    .. rubric:: Functions

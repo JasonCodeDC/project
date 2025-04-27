@@ -1,7 +1,7 @@
-﻿modules.animals
-===============
+﻿src.modules.animals
+===================
 
-.. automodule:: modules.animals
+.. automodule:: src.modules.animals
 
    
    .. rubric:: Classes
