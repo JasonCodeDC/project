@@ -77,12 +77,10 @@ class Map:
         self.points = set()
 
         for _ in range(num_biomes):
-            while point := (
-                random.randrange(self._width),
-                random.randrange(self._height),
-            ):
-                pass
-            self.points.add((point, TerrainTypes(random.randrange(3))))
+            point = (random.randrange(self._width), random.randrange(self._height))
+            while any(point == p[0] for p in self.points):
+                point = (random.randrange(self._width), random.randrange(self._height))
+            self.points.add((point, TerrainTypes(random.randrange(len(TerrainTypes)))))
 
         self.map = [[None for _ in range(self._width)] for _ in range(self._height)]
 
