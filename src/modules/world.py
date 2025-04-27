@@ -2,7 +2,9 @@
 
 import random
 from enum import Enum
-from typing import Any, Optional, Tuple
+from typing import Annotated, Any, Optional, Tuple
+
+from annotated_types import Gt
 
 
 class TerrainTypes(Enum):
@@ -26,7 +28,9 @@ class Map:
     :type height: int
     """
 
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(
+        self, width: Annotated[int, Gt(0)], height: Annotated[int, Gt(0)]
+    ) -> None:
         """
         Constructor method
         """
@@ -38,7 +42,7 @@ class Map:
         """
         Converts the map to a string
 
-        :return: A string which can be printed to console showing the current state of the map, if map has been generated
+        :return: A string which can be printed to console showing the current state of the map, if map has been generated. If not, returns None
         :rtype: Optional[str]
         """
         if not self.map:
@@ -54,20 +58,42 @@ class Map:
         """
         return f"Map(width:{self._width}, height:{self._height}, map:{self.map})"
 
-    def generate_map(self, seed: Any = None) -> None:
+    def generate_map(self, num_biomes: Annotated[int, Gt(0)], seed: Any = None) -> None:
         """
-        Placeholder random map generation
+        Random map generation
 
-        TODO: replace with properly usable implementation
-
+        :param num_biomes: Number of random points to choose to base map off of
+        :type num_biomes: int
         :param seed: Seed to use with the random number generator
         :type seed: Any
         """
+        if num_biomes <= 0:
+            raise MapError("num_biomes must be positive")
+        if num_biomes > self._width * self._height:
+            raise MapError("More biomes than possible cells")
+
         random.seed(seed)
-        self.map = [
-            [TerrainTypes(random.randint(0, 3)) for _ in range(self._width)]
-            for _ in range(self._height)
-        ]
+
+        self.points = set()
+
+        for _ in range(num_biomes):
+            while point := (
+                random.randrange(self._width),
+                random.randrange(self._height),
+            ):
+                pass
+            self.points.add((point, TerrainTypes(random.randrange(3))))
+
+        self.map = [[None for _ in range(self._width)] for _ in range(self._height)]
+
+        for y in range(self._height):
+            for x in range(self._width):
+                closest = [float("inf"), None]
+                for (px, py), terrain in self.points:
+                    dist = abs(px - x) + abs(py - y)
+                    if dist < closest[0]:
+                        closest = [dist, terrain]
+                self.map[y][x] = closest[1]
 
     def get_terrain_type(self, x: int, y: int):
         """
@@ -94,7 +120,7 @@ class Map:
         return self.map[y][x]
 
     def get_tile_colour(self, x: int, y: int) -> Tuple[int, int, int]:
-        """ 
+        """
         Get the tile colour at a specific (x, y) coordinate
 
         :param x: x coordinate of the tile
@@ -103,7 +129,7 @@ class Map:
         :type y: int
         :raises MapError: See :func:`get_terrain_type` for list of reasons
         :return: A tuple containing 3 integers, in RGB format
-        :rtype: tuple[int, int, int] 
+        :rtype: tuple[int, int, int]
 
         """
         colours_dict = {
