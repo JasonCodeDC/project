@@ -137,3 +137,46 @@ class Map:
             TerrainTypes.MOUNTAIN: (0xB1, 0xB1, 0xB1),
         }
         return colours_dict[self.get_terrain_type(x, y)]
+    
+    def get_speed_multiplier(self, x: int, y: int) -> float:
+        """
+        Get the speed multiplier at a specific (x, y) coordinate
+
+        :param x: x coordinate of the tile
+        :type x: int
+        :param y: y coordinate of the tile
+        :type y: int
+        :raises MapError: See :func:`get_terrain_type` for list of reasons
+        :return: A float to multiply speed by
+        :rtype: float
+
+        """
+        speed_multipliers = {
+            TerrainTypes.PLAINS: 1,
+            TerrainTypes.FOREST: 0.7,
+            TerrainTypes.OCEAN: 0.4,
+            TerrainTypes.MOUNTAIN: 0.3,
+        }
+        return speed_multipliers[self.get_terrain_type(x, y)]
+
+    def get_visibility(self, x: int, y: int) -> float:
+        """
+        Get the visibility cost at a specific (x, y) coordinate
+
+        :param x: x coordinate of the tile
+        :type x: int
+        :param y: y coordinate of the tile
+        :type y: int
+        :raises MapError: See :func:`get_terrain_type` for list of reasons
+        :return: A float to multiply visibility distance by
+        :rtype: float
+
+        """
+        visibility_multipliers = {
+            TerrainTypes.PLAINS: 1,
+            TerrainTypes.FOREST: 0.4,
+            TerrainTypes.OCEAN: 0.7,
+            TerrainTypes.MOUNTAIN: 1.3,
+        }
+        return visibility_multipliers[self.get_terrain_type(x, y)]
+
