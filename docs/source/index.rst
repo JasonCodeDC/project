@@ -17,6 +17,6 @@ API Reference
    :recursive:
 
    src.simulation
-   src.tests.test_world
+   src.tests.test_world_gen
    src.modules.animals
    src.modules.world
