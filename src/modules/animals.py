@@ -27,6 +27,8 @@ class Animal(Sprite):
     :type health: int
     :param strength: Damage per hit from the animal
     :type strength: int
+    :param colour: Colour the animal will come up as on screen
+    :type colour: Tuple[int, int, int]
     """
 
     @classmethod
