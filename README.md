@@ -15,4 +15,4 @@ For testing:
 
 `uv sync`
 
-`uv run -m src.simulation.test_*.py`
+`uv run -m src.simulation.test_*`
