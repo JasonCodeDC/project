@@ -17,5 +17,5 @@
       handle_map_zoom
       handle_seed_input
       handle_slider_drag
-      main
+      run
    
