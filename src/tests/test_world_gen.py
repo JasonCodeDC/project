@@ -413,7 +413,7 @@ def draw_map(
     screen.blit(surf, (map_area_rect.x, map_area_rect.y))
 
 
-def main():
+def run():
     """
     Main function that runs the world test application.
     """
@@ -470,8 +470,7 @@ def main():
     target_cell_size = cell_size
     zoom_speed = 0.2
 
-    running = True
-    while running:
+    while True:
         mouse_pos = pygame.mouse.get_pos()
 
         if abs(cell_size - target_cell_size) > 0.1:
@@ -481,7 +480,8 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                return SystemExit(0)
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -720,8 +720,6 @@ def main():
         pygame.display.flip()
         clock.tick(60)
 
-    pygame.quit()
-
 
 if __name__ == "__main__":
-    main()
+    run()
