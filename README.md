@@ -1,4 +1,4 @@
-# project-priv
+# project
  
 ## Getting started
 
