@@ -19,7 +19,9 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
 
         # Pygame necessities
-        self.image = pygame.Surface([15, 35])
+        self.standing_image = pygame.Surface([15, 35])
+        self.crouch_image = pygame.Surface([15, 20])
+        self.image = self.standing_image
         self.image.fill(WHITE)
         self.rect = self.image.get_rect()
 
@@ -34,6 +36,10 @@ class Player(pygame.sprite.Sprite):
         self.velocity_y = 0
         self.on_ground = False
 
+        # Crouching variables
+        self.crouched = False
+        self.original_height = self.image.get_height()
+
     def update(self):
         # Apply gravity
         if not self.on_ground:
@@ -46,10 +52,28 @@ class Player(pygame.sprite.Sprite):
         if keys[K_d]:
             self.rect.x += self.speed
 
-        # Vertical movement
+        # Jumping
         if keys[K_SPACE] and self.on_ground:
             self.velocity_y = -JUMP_POWER
             self.on_ground = False
+
+        # Crouching
+        if keys[K_s] and not self.crouched:
+            self.crouched = True
+            temp_bottom, temp_centerx = self.rect.bottom, self.rect.centerx
+            self.image = self.crouch_image
+            self.image.fill(WHITE)
+            self.rect = self.image.get_rect()
+            self.rect.bottom, self.rect.centerx = temp_bottom, temp_centerx
+
+        # Uncrouching
+        if not keys[K_s] and self.crouched:
+            self.crouched = False
+            temp_bottom, temp_centerx = self.rect.bottom, self.rect.centerx
+            self.image = self.standing_image
+            self.image.fill(WHITE)
+            self.rect = self.image.get_rect()
+            self.rect.bottom, self.rect.centerx = temp_bottom, temp_centerx
 
         # Apply vertical movement
         self.rect.y += self.velocity_y
