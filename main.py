@@ -1,5 +1,5 @@
 import pygame
-from pygame.locals import *
+from pygame.locals import *  # noqa: F403
 
 # Constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
@@ -47,18 +47,18 @@ class Player(pygame.sprite.Sprite):
 
         # Horizontal movement
         keys = pygame.key.get_pressed()
-        if keys[K_a]:
+        if keys[K_a]:  # noqa: F405
             self.rect.x -= self.speed
-        if keys[K_d]:
+        if keys[K_d]:  # noqa: F405
             self.rect.x += self.speed
 
         # Jumping
-        if keys[K_SPACE] and self.on_ground:
+        if keys[K_SPACE] and self.on_ground:  # noqa: F405
             self.velocity_y = -JUMP_POWER
             self.on_ground = False
 
         # Crouching
-        if keys[K_s] and not self.crouched:
+        if keys[K_s] and not self.crouched:  # noqa: F405
             self.crouched = True
             temp_bottom, temp_centerx = self.rect.bottom, self.rect.centerx
             self.image = self.crouch_image
@@ -67,7 +67,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom, self.rect.centerx = temp_bottom, temp_centerx
 
         # Uncrouching
-        if not keys[K_s] and self.crouched:
+        if not keys[K_s] and self.crouched:  # noqa: F405
             self.crouched = False
             temp_bottom, temp_centerx = self.rect.bottom, self.rect.centerx
             self.image = self.standing_image
@@ -108,7 +108,7 @@ player = Player(all_sprites)
 while True:
     # Event loop
     for event in pygame.event.get():
-        if event.type == QUIT:
+        if event.type == QUIT:  # noqa: F405
             pygame.quit()
             raise SystemExit(0)
 
